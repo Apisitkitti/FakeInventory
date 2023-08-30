@@ -6,13 +6,13 @@ namespace Rov.InventorySystem
     public class UIItem : MonoBehaviour
     {
         [SerializeField] Text itemNameText;
-        [SerializeField] Text countText;
+        [SerializeField] Text PriceText;
         [SerializeField] Image pointerImage;
 
         public void SetData(UIItem_Data data)
         {
             itemNameText.text = data.itemData.displayName;
-            countText.text = "X " +  data.itemData.count;
+            PriceText.text = "X " +  data.itemData.price;
             pointerImage.gameObject.SetActive(data.isSelected);
         }
     }

@@ -7,17 +7,23 @@ namespace Rov.InventorySystem
 {
     public class UIInventory : MonoBehaviour
     {
+        #region Category
         [Header("Category")]
         [SerializeField] Image categoryIconImage;
         [SerializeField] Text categoryText;
+        #endregion
         
+        #region CurrentItem
         [Header("Current Item")]
         [SerializeField] Image currentItemIconImage;
         [SerializeField] Text descriptionText;
+        #endregion
 
+        #region Item List
         [Header("Item List")] 
         [SerializeField] UIItem itemUIPrefab;
         [SerializeField] List<UIItem> itemUIList = new List<UIItem>();
+        #endregion
 
         void Start()
         {

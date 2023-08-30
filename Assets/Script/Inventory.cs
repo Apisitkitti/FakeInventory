@@ -26,15 +26,6 @@ namespace Rov.InventorySystem
             }
             return resultlist.ToArray();
         }
-        public void Add(ItemData itemToAdd)
-        {
-            
-        }
-
-        public void Remove(ItemData itemToRemove)
-        {
-            
-        }
     }
 }
 
@@ -45,15 +36,13 @@ namespace Rov.InventorySystem
         public string description;
         public Sprite icon;
         public ItemType type; 
-        public int count;
+        public int price;
+
     }
 
     public enum ItemType
     {
         Physic_attack,
         Magic_Attack,
-        Defense,
-        Movement,
-        Jungling,
-        Support
+        Defense
     }
