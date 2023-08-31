@@ -34,7 +34,7 @@ namespace Rov.InventorySystem
         void RefreshUI()
         {
             var currentCategoryInfo = categoryInfoList[currentItemIndex];
-            ui.SetCategory(currentCategoryInfo);
+            // ui.SetCategory(currentCategoryInfo);
 
             var currentCategory = (ItemType)curentCategoryIndex;
 

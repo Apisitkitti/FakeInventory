@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,16 +8,16 @@ namespace Rov.InventorySystem
 {
     public class UIShop : MonoBehaviour
     {
-        #region Category
-        [Header("Category")]
-        [SerializeField] Image categoryIconImage;
-        [SerializeField] Text categoryText;
-        #endregion
+        // #region Category
+        // [Header("Category")]
+        // [SerializeField] Image categoryIconImage;
+        // [SerializeField] Text categoryText;
+        // #endregion
         
         #region CurrentItem
         [Header("Current Item")]
         [SerializeField] Image currentItemIconImage;
-        [SerializeField] Text descriptionText;
+        [SerializeField] TMP_Text descriptionText;
         #endregion
 
         #region Item List
@@ -31,11 +32,11 @@ namespace Rov.InventorySystem
             itemUIPrefab.gameObject.SetActive(false);
         }
 
-        public void SetCategory(CategoryInfo info)
-        {
-            categoryIconImage.sprite = info.icon;
-            categoryText.text = info.name;
-        }
+        // public void SetCategory(CategoryInfo info)
+        // {
+        //     categoryIconImage.sprite = info.icon;
+        //     categoryText.text = info.name;
+        // }
         
         public void SetCurrentItemInfo(ItemData data)
         {
@@ -73,7 +74,6 @@ namespace Rov.InventorySystem
     [Serializable]
     public class CategoryInfo
     {
-        public string name;
-        public Sprite icon;
+                public string name;
     }
 }

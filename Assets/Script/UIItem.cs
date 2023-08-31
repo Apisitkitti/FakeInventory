@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,15 +6,15 @@ namespace Rov.InventorySystem
 {
     public class UIItem : MonoBehaviour
     {
-        [SerializeField] Text itemNameText;
-        [SerializeField] Text PriceText;
-        [SerializeField] Image pointerImage;
+        [SerializeField] TMP_Text itemNameText;
+        [SerializeField] TMP_Text PriceText;
+        [SerializeField] Image IconImage;
 
         public void SetData(UIItem_Data data)
         {
+            IconImage.sprite = data.itemData.icon;
             itemNameText.text = data.itemData.displayName;
             PriceText.text = "X " +  data.itemData.price;
-            pointerImage.gameObject.SetActive(data.isSelected);
         }
     }
 
@@ -21,12 +22,10 @@ namespace Rov.InventorySystem
     public class UIItem_Data
     {
         public ItemData itemData;
-        public bool isSelected;
 
         public UIItem_Data(ItemData itemData, bool isSelected)
         {
             this.itemData = itemData;
-            this.isSelected = isSelected;
         }
     }
 }
