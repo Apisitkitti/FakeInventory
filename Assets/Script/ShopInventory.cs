@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 namespace Rov.InventorySystem
 {
-    public class Inventory : MonoBehaviour
+    public class ShopInventory : MonoBehaviour
     {
         public ItemData[] Items => itemList.ToArray();
         [SerializeField] List<ItemData> itemList = new List<ItemData>();

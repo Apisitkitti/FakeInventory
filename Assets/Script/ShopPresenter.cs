@@ -17,8 +17,8 @@ namespace Rov.InventorySystem
         #endregion
 
         #region SerializeField
-        [SerializeField] UIInventory ui;
-        [SerializeField] Inventory inventory;
+        [SerializeField] UIShop ui;
+        [SerializeField] ShopInventory inventory;
         [SerializeField] List<CategoryInfo> categoryInfoList = new List<CategoryInfo>();
         #endregion
 

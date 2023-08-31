@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Rov.InventorySystem
 {
-    public class UIInventory : MonoBehaviour
+    public class UIShop : MonoBehaviour
     {
         #region Category
         [Header("Category")]
