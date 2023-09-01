@@ -195,7 +195,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -376,7 +376,7 @@ RectTransform:
   - {fileID: 2047284575}
   - {fileID: 2026784078}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -449,7 +449,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &888595534 stripped
 MonoBehaviour:
@@ -574,9 +574,7 @@ MonoBehaviour:
   currentItemIconImage: {fileID: 1806076491}
   descriptionText: {fileID: 888595534}
   itemUIPrefab: {fileID: 7047197030852045289, guid: db3c9a1bd5fbaec4980accff6a5ee2ba, type: 3}
-  itemUIList:
-  - {fileID: 0}
-  - {fileID: 0}
+  itemUIList: []
 --- !u!224 &2026784078
 RectTransform:
   m_ObjectHideFlags: 0

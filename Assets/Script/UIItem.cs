@@ -23,7 +23,7 @@ namespace Rov.InventorySystem
     {
         public ItemData itemData;
 
-        public UIItem_Data(ItemData itemData, bool isSelected)
+        public UIItem_Data(ItemData itemData)
         {
             this.itemData = itemData;
         }

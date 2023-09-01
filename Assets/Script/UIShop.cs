@@ -58,6 +58,8 @@ namespace Rov.InventorySystem
                 newItemUI.gameObject.SetActive(true);
                 itemUIList.Add(newItemUI);
                 newItemUI.SetData(uiItemData);
+                newItemUI.name = uiItemData.itemData.displayName;
+
             }
         }
 
@@ -74,6 +76,6 @@ namespace Rov.InventorySystem
     [Serializable]
     public class CategoryInfo
     {
-                public string name;
+        public string name;
     }
 }
