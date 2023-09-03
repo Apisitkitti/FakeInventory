@@ -12,7 +12,7 @@ namespace Rov.InventorySystem
 
         int maxShownItemCount;
         int maxCategoryCount = 3;
-        int pageSize = 2;
+        int pageSize = 10;
 
         [SerializeField] UIShop ui;
         [SerializeField] ShopInventory inventory;

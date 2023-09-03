@@ -14,7 +14,7 @@ namespace Rov.InventorySystem
         {
             IconImage.sprite = data.itemData.icon;
             itemNameText.text = data.itemData.displayName;
-            PriceText.text = "X " +  data.itemData.price;
+            PriceText.text = " " +  data.itemData.price;
         }
     }
 
