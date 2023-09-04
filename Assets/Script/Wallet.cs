@@ -18,7 +18,7 @@ namespace Rov.InventorySystem
 
         public void UpdateMoneyText()
         {
-            MoneyWallet.text = "Money: " + PlayerMoney.ToString();
+            MoneyWallet.text = " " + PlayerMoney.ToString();
         }
     }
 }
