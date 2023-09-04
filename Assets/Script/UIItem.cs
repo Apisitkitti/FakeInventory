@@ -10,7 +10,6 @@ namespace Rov.InventorySystem
         [SerializeField] TMP_Text descriptionText;
         [SerializeField] TMP_Text PriceText;
         [SerializeField] Image IconImage;
-
         public void SetData(UIItem_Data data)
         {
             IconImage.sprite = data.itemData.icon;
