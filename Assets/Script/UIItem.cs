@@ -7,6 +7,7 @@ namespace Rov.InventorySystem
     public class UIItem : MonoBehaviour
     {
         [SerializeField] TMP_Text itemNameText;
+        [SerializeField] TMP_Text descriptionText;
         [SerializeField] TMP_Text PriceText;
         [SerializeField] Image IconImage;
 
@@ -14,6 +15,7 @@ namespace Rov.InventorySystem
         {
             IconImage.sprite = data.itemData.icon;
             itemNameText.text = data.itemData.displayName;
+            descriptionText.text = data.itemData.description;
             PriceText.text = " " +  data.itemData.price;
         }
     }

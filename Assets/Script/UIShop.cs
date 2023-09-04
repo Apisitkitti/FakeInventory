@@ -17,6 +17,7 @@ namespace Rov.InventorySystem
         #region CurrentItem
         [Header("Current Item")]
         [SerializeField] Image currentItemIconImage;
+        [SerializeField] TMP_Text ItemNameText;
         [SerializeField] TMP_Text descriptionText;
         #endregion
 
@@ -40,6 +41,7 @@ namespace Rov.InventorySystem
         
         public void SetCurrentItemInfo(ItemData data)
         {
+            ItemNameText.text = data.displayName;
             descriptionText.text = data.description;
             currentItemIconImage.sprite = data.icon;
         }
