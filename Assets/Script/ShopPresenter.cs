@@ -1,8 +1,9 @@
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngineDebug = UnityEngine.Debug;
 namespace Rov.InventorySystem
 {
     public class ShopPresenter : MonoBehaviour
@@ -12,8 +13,14 @@ namespace Rov.InventorySystem
 
         int maxShownItemCount;
         int maxCategoryCount = 3;
+<<<<<<< HEAD
         int pageSize = 10;
 
+=======
+        int pageSize = 2;
+       // int PlayerMoney = 10000;
+       [SerializeField] Wallet wallet;
+>>>>>>> origin/PurchaseSystem
         [SerializeField] UIShop ui;
         [SerializeField] ShopInventory inventory;
         
@@ -70,8 +77,9 @@ namespace Rov.InventorySystem
         {
             if (currentItemIndex <= 0)
                 return;
-
+            
             currentItemIndex--;
+            UnityEngineDebug.Log("Prev Item");
             RefreshUI();
         }
 
@@ -81,6 +89,7 @@ namespace Rov.InventorySystem
                 return;
             
             currentItemIndex++;
+            UnityEngineDebug.Log("Next Item");
             RefreshUI();
         }
 
@@ -133,6 +142,40 @@ namespace Rov.InventorySystem
             //Draw the results! Convert to array to prevent the results from being changed accidentally.
             ui.SetItemList(uiDataList.ToArray());
         }
+        
+        public void PurChase()
+        {
+            if(currentItemIndex >=  0)
+            {
+                
+                MoneyPlayer();
+            }
+        }
+        public void MoneyPlayer()
+        {  
+                
+                // ดึงข้อมูลไอเท็มปัจจุบัน
+                var currentItem = inventory.GetItemsByType((ItemType)currentCategoryIndex)[currentItemIndex];
+                // ตรวจสอบว่าผู้เล่นมีเงินเพียงพอในการซื้อไอเท็ม
+                if (wallet.PlayerMoney  >= currentItem.price)
+                {
+                    // ลดยอดเงินของผู้เล่น
+                    /*PlayerMoney -= currentItem.price;
+                    UnityEngineDebug.Log("Purchase successful!");
+                    UnityEngineDebug.Log("MONEY: " + PlayerMoney);*/
+                    wallet.PlayerMoney  -= currentItem.price;
+                    UnityEngineDebug.Log("Purchase successful!");
+                    UnityEngineDebug.Log("MONEY: " + wallet.PlayerMoney);
+                    wallet.UpdateMoneyText();
+                }
+                else
+                {
+                    UnityEngineDebug.Log("Not enough money to purchase!");
+                    
+                }
+            
+        }
+
     }
 }
 
