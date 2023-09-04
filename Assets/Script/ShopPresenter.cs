@@ -26,25 +26,13 @@ namespace Rov.InventorySystem
         {
             RefreshUI();
         }
-
-        void Update()
+        public void ClickPreviousItem()
         {
-            // if (Input.GetKeyDown(KeyCode.A))
-            // {
-            //     PrevCategory();
-            // }
-            // else if (Input.GetKeyDown(KeyCode.D))
-            // {
-            //     NextCategory();
-            // }
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                PrevItem();
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                NextItem();
-            }
+            PrevItem();
+        }
+        public void ClickNextItem()
+        {
+            NextItem();
         }
 
         public void PhysicCategory()
@@ -138,26 +126,22 @@ namespace Rov.InventorySystem
             ui.SetItemList(uiDataList.ToArray());
         }
         
-        public void PurChase()
+        public void CheckCurrentItem()
         {
             if(currentItemIndex >=  0)
             {
                 
-                MoneyPlayer();
+                PurChaseItem();
             }
         }
-        public void MoneyPlayer()
+        public void  PurChaseItem()
         {  
-                
                 // ดึงข้อมูลไอเท็มปัจจุบัน
                 var currentItem = inventory.GetItemsByType((ItemType)currentCategoryIndex)[currentItemIndex];
                 // ตรวจสอบว่าผู้เล่นมีเงินเพียงพอในการซื้อไอเท็ม
                 if (wallet.PlayerMoney  >= currentItem.price)
-                {
-                    // ลดยอดเงินของผู้เล่น
-                    /*PlayerMoney -= currentItem.price;
-                    UnityEngineDebug.Log("Purchase successful!");
-                    UnityEngineDebug.Log("MONEY: " + PlayerMoney);*/
+                {   
+                    //BuyItem
                     wallet.PlayerMoney  -= currentItem.price;
                     UnityEngineDebug.Log("Purchase successful!");
                     UnityEngineDebug.Log("MONEY: " + wallet.PlayerMoney);
@@ -170,7 +154,22 @@ namespace Rov.InventorySystem
                 }
             
         }
-
+        //Pagination 5 items / 7 items / 10 items
+        public void Page5item()
+        {
+            pageSize = 5;
+            RefreshUI();
+        }
+        public void Page7item()
+        {
+            pageSize = 7;
+            RefreshUI();
+        }
+        public void Page10item()
+        {
+            pageSize = 10;
+            RefreshUI();
+        }
     }
 }
 
