@@ -9,7 +9,7 @@ namespace Rov.InventorySystem
     public class ShopPresenter : MonoBehaviour
     {
         int currentItemIndex;
-        int currentCategoryIndex;
+        public int currentCategoryIndex;
 
         int maxShownItemCount;
         int maxCategoryCount = 3;
@@ -17,10 +17,13 @@ namespace Rov.InventorySystem
        // int PlayerMoney = 10000;
        [SerializeField] Wallet wallet;
         [SerializeField] UIShop ui;
+    
         [SerializeField] ShopInventory inventory;
         
         //This list tells the UI what name and icon to set for each category.
         [SerializeField] List<CategoryInfo> categoryInfoList = new List<CategoryInfo>();
+        [SerializeField] List<CategoryAb> category;
+
 
         void Start()
         {
@@ -54,8 +57,14 @@ namespace Rov.InventorySystem
             currentItemIndex = 0;
             RefreshUI();
         }
-
-
+        public void CategoryButton(GameObject CategoryButton)
+        {
+          for(int i = 0; i<category.Count; i++)
+          {
+            category[i].IndexOfCategory(CategoryButton);
+          }
+          
+        }
         void PrevItem()
         {
             if (currentItemIndex <= 0)
@@ -77,7 +86,7 @@ namespace Rov.InventorySystem
         }
 
         [ContextMenu(nameof(RefreshUI))]
-        void RefreshUI()
+        public void RefreshUI()
         {
             var currentCategoryInfo = categoryInfoList[currentCategoryIndex];
             //ui.SetCategory(currentCategoryInfo);

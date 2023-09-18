@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class CategoryAb : MonoBehaviour
 {
-    public abstract void SetCategoryIndex(GameObject Categoryname) ;
+    public abstract void IndexOfCategory(GameObject Category) ;
 }
