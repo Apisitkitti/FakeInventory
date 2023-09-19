@@ -3607,7 +3607,7 @@ GameObject:
   - component: {fileID: 841434955}
   - component: {fileID: 841434954}
   m_Layer: 5
-  m_Name: Cash
+  m_Name: CashNew
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4330,9 +4330,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1398685889}
+      - m_Target: {fileID: 2046702516}
         m_TargetAssemblyTypeName: Rov.InventorySystem.ShopPresenter, Assembly-CSharp
-        m_MethodName: CheckCurrentItem
+        m_MethodName: PurChaseItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7362,7 +7362,7 @@ GameObject:
   - component: {fileID: 1443753158}
   - component: {fileID: 1443753159}
   m_Layer: 0
-  m_Name: Moneymanager
+  m_Name: NewMoneymanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9374,7 +9374,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 105253490}
   m_Direction: 2
   m_Value: 1.0000001
-  m_Size: 0.50602406
+  m_Size: 0.51084334
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11069,7 +11069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCategoryIndex: 0
-  wallet: {fileID: 1400423870}
+  wallet: {fileID: 1443753159}
   ui: {fileID: 2132020529}
   inventory: {fileID: 2046702515}
   categoryInfoList:
