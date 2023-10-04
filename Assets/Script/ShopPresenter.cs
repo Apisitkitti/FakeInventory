@@ -124,16 +124,16 @@ namespace Rov.InventorySystem
             var startIndexToDisplay = currentPageIndex * pageSize;
             var endIndexToDisplay = startIndexToDisplay + pageSize;
             
-            var i = 0;
+            var count = 0;
             foreach (var item in itemsToDisplay)
             {
                 //Select only item within start and end index and add to list.
-                if (i >= startIndexToDisplay && i < endIndexToDisplay)
+                if (count >= startIndexToDisplay && count < endIndexToDisplay)
                 {
                     uiDataList.Add(new UIItem_Data(item));
                 }
               
-                i++;
+                count++;
             }
             
             //Draw the results! Convert to array to prevent the results from being changed accidentally.
