@@ -1,34 +1,38 @@
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngineDebug = UnityEngine.Debug;
+using Newtonsoft.Json;
+using UnityEngine.Networking;
+using System.IO;
 namespace Rov.InventorySystem
 {
     public class ShopPresenter : MonoBehaviour
     {
         int currentItemIndex;
         public int currentCategoryIndex;
-
+        [Header("Online-Save")]
+        [SerializeField] string mysave;
+        [SerializeField] string loading;
+      
         int maxShownItemCount;
         int maxCategoryCount = 3;
         int pageSize = 10;
        // int PlayerMoney = 10000;
        [SerializeField] Wallet wallet;
         [SerializeField] UIShop ui;
-    
+        [SerializeField] ShopInventory shop;
         [SerializeField] ShopInventory inventory;
         
         //This list tells the UI what name and icon to set for each category.
         [SerializeField] List<CategoryInfo> categoryInfoList = new List<CategoryInfo>();
         [SerializeField] List<CategoryAb> category;
 
-
-        void Start()
+        void Awake()
         {
-            RefreshUI();
+          LoadScoreFromGoogleDrive();
         }
+        
         public void ClickPreviousItem()
         {
             PrevItem();
@@ -71,7 +75,7 @@ namespace Rov.InventorySystem
                 return;
             
             currentItemIndex--;
-            UnityEngineDebug.Log("Prev Item");
+            Debug.Log("Prev Item");
             RefreshUI();
         }
 
@@ -81,7 +85,7 @@ namespace Rov.InventorySystem
                 return;
             
             currentItemIndex++;
-            UnityEngineDebug.Log("Next Item");
+            Debug.Log("Next Item");
             RefreshUI();
         }
 
@@ -107,6 +111,7 @@ namespace Rov.InventorySystem
             
             //Current item is retrieved from itemsToDisplay using 'currentItemIndex'
             var currentItem = itemsToDisplay[currentItemIndex];
+            
             ui.SetCurrentItemInfo(currentItem);
 
             //This will hold list of UIItem_Data for the display of UIItem
@@ -134,7 +139,57 @@ namespace Rov.InventorySystem
             //Draw the results! Convert to array to prevent the results from being changed accidentally.
             ui.SetItemList(uiDataList.ToArray());
         }
-        
+
+        [ContextMenu(nameof(SaveScoreData))]
+        void SaveScoreData()
+        {
+            if (string.IsNullOrEmpty(mysave))
+            {
+                Debug.Log("NO SAVE!");
+                return;
+            }
+
+            var scoreJson = JsonConvert.SerializeObject(shop.itemList, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            }); ;
+            var dataPath = Application.dataPath;
+            var targetFilePath = Path.Combine(dataPath, mysave);
+
+            var directoryPath = Path.GetDirectoryName(targetFilePath);
+            if (Directory.Exists(directoryPath) == false)
+                Directory.CreateDirectory(directoryPath);
+
+            File.WriteAllText(targetFilePath, scoreJson);
+        }
+
+
+        IEnumerator LoadDataRoutine(string url)
+        {
+            var webRequest = UnityWebRequest.Get(url);
+            //Get download progress
+            var progress = webRequest.downloadProgress;
+            Debug.Log(progress);
+
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(webRequest.error);
+            }
+            else
+            {
+                var downloadedText = webRequest.downloadHandler.text;
+                shop.itemList = JsonConvert.DeserializeObject<List<ItemData>>(downloadedText);
+            }
+            RefreshUI();
+        }
+         [ContextMenu(nameof(LoadScoreFromGoogleDrive))]
+        void LoadScoreFromGoogleDrive()
+        {
+            StartCoroutine(LoadDataRoutine(loading));
+        }
+
         public void CheckCurrentItem()
         {
             if(currentItemIndex >=  0)
@@ -152,13 +207,13 @@ namespace Rov.InventorySystem
                 {   
                     //BuyItem
                     wallet.PlayerMoney  -= currentItem.price;
-                    UnityEngineDebug.Log("Purchase successful!");
-                    UnityEngineDebug.Log("MONEY: " + wallet.PlayerMoney);
+                    Debug.Log("Purchase successful!");
+                    Debug.Log("MONEY: " + wallet.PlayerMoney);
                     wallet.UpdateMoneyText();
                 }
                 else
                 {
-                    UnityEngineDebug.Log("Not enough money to purchase!");
+                    Debug.Log("Not enough money to purchase!");
                     
                 }
             

@@ -45,7 +45,6 @@ namespace Rov.InventorySystem
             descriptionText.text = data.description;
             currentItemIconImage.sprite = data.icon;
         }
-
         public void SetItemList(UIItem_Data[] uiDatas)
         {
             //Clear and destroy created UIs first, before creating new ones.

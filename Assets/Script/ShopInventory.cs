@@ -9,8 +9,10 @@ namespace Rov.InventorySystem
 {
     public class ShopInventory : MonoBehaviour
     {
+        public IconData[] ItemIcon => itemIconlist.ToArray();
+        [SerializeField] public List<IconData> itemIconlist = new List<IconData>();
         public ItemData[] Items => itemList.ToArray();
-        [SerializeField] List<ItemData> itemList = new List<ItemData>();
+        [SerializeField] public List<ItemData> itemList = new List<ItemData>();
 
         public ItemData[] GetItemsByType(ItemType targetType)
         {
@@ -19,13 +21,23 @@ namespace Rov.InventorySystem
             {
                 if(ItemData.type == targetType)
                 {
-                    if(ItemData.type == targetType)
-                        resultlist.Add(ItemData);
-                    
-                } 
+                  int number = 0;
+                  foreach(var IconData in itemIconlist)
+                  {
+                    if(ItemData.displayName == IconData.displayName)
+                    {
+                      ItemData.icon = IconData.icon;
+                    }
+                    number++;
+                  }
+                  resultlist.Add(ItemData); 
+                }
+                
             }
-            return resultlist.ToArray();
+              return resultlist.ToArray();  
+           
         }
+        
     }
 }
 
@@ -34,10 +46,15 @@ namespace Rov.InventorySystem
     {
         public string displayName;
         public string description;
-        public Sprite icon;
         public ItemType type; 
         public int price;
-
+        public Sprite icon;
+    }
+    [Serializable]
+    public class IconData
+    {
+       public Sprite icon;
+       public string displayName;
     }
 
     public enum ItemType
