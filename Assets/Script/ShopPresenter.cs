@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,7 +7,7 @@ using Newtonsoft.Json;
 using UnityEngine.Networking;
 using System.IO;
 using DG.Tweening;
-
+using UnityEngine.UI;
 namespace Rov.InventorySystem
 {
     public class ShopPresenter : MonoBehaviour
@@ -25,7 +26,8 @@ namespace Rov.InventorySystem
         [SerializeField] UIShop ui;
         [SerializeField] ShopInventory shop;
         [SerializeField] ShopInventory inventory;
-        
+        [SerializeField] GameObject loadingScreen;
+        [SerializeField] Slider slider;
         //This list tells the UI what name and icon to set for each category.
         [SerializeField] List<CategoryInfo> categoryInfoList = new List<CategoryInfo>();
         [SerializeField] List<CategoryAb> category;
@@ -168,12 +170,17 @@ namespace Rov.InventorySystem
 
         IEnumerator LoadDataRoutine(string url)
         {
-            var webRequest = UnityWebRequest.Get(url);
-            //Get download progress
-            var progress = webRequest.downloadProgress;
-            Debug.Log(progress);
-
-            yield return webRequest.SendWebRequest();
+            UnityWebRequest webRequest = UnityWebRequest.Get(url);
+            DownloadHandler  dowloadHandler = webRequest.downloadHandler;
+            loadingScreen.SetActive(true);
+            webRequest.SendWebRequest();
+            while(!webRequest.isDone){
+                slider.value = webRequest.downloadProgress;
+                Debug.Log("Dowload : " + (int)(webRequest.downloadProgress * 100f) + "%");
+                yield return null;
+            }
+            loadingScreen.SetActive(false);
+            //yield return webRequest.SendWebRequest();
 
             if (webRequest.result != UnityWebRequest.Result.Success)
             {
