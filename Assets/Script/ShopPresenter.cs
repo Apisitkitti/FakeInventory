@@ -5,6 +5,8 @@ using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
 using System.IO;
+using DG.Tweening;
+
 namespace Rov.InventorySystem
 {
     public class ShopPresenter : MonoBehaviour
@@ -234,6 +236,7 @@ namespace Rov.InventorySystem
             pageSize = 10;
             RefreshUI();
         }
+        
     }
 }
 
