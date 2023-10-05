@@ -5,7 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
 using System.IO;
-using DG.Tweening;
+
 
 namespace Rov.InventorySystem
 {
@@ -21,10 +21,11 @@ namespace Rov.InventorySystem
         int maxCategoryCount = 3;
         int pageSize = 10;
        // int PlayerMoney = 10000;
-       [SerializeField] Wallet wallet;
+        [SerializeField] Wallet wallet;
         [SerializeField] UIShop ui;
         [SerializeField] ShopInventory shop;
         [SerializeField] ShopInventory inventory;
+        
         
         //This list tells the UI what name and icon to set for each category.
         [SerializeField] List<CategoryInfo> categoryInfoList = new List<CategoryInfo>();

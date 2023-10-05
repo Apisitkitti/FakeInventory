@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Rov.InventorySystem
 {
@@ -13,7 +14,8 @@ namespace Rov.InventorySystem
         // [SerializeField] Image categoryIconImage;
         // [SerializeField] Text categoryText;
         // #endregion
-        
+
+        public float fadeTime = 1f;
         #region CurrentItem
         [Header("Current Item")]
         [SerializeField] Image currentItemIconImage;
@@ -24,7 +26,7 @@ namespace Rov.InventorySystem
         #region Item List
         [Header("Item List")] 
         [SerializeField] UIItem itemUIPrefab;
-        [SerializeField] List<UIItem> itemUIList = new List<UIItem>();
+        [SerializeField] public List<UIItem> itemUIList = new List<UIItem>();
         #endregion
 
         void Start()
@@ -51,19 +53,24 @@ namespace Rov.InventorySystem
             ClearAllItemUIs();
             foreach (var uiItemData in uiDatas)
             {
+                
                 //When creating a new UI, ALWAYS put it inside Canvas. and pass false for 'worldPositionStays'
                 //This is because all UIs are always in Screen Space not World Space.
                 var newItemUI = Instantiate(itemUIPrefab,itemUIPrefab.transform.parent,false);
                 
+                newItemUI.transform.localScale = Vector3.zero;
+                newItemUI.transform.DOScale(1f, fadeTime).SetEase(Ease.OutBounce);
+
                 //Don't forget to enable it. Because the original UIItem was disabled from Start()
                 newItemUI.gameObject.SetActive(true);
                 itemUIList.Add(newItemUI);
                 newItemUI.SetData(uiItemData);
                 newItemUI.name = uiItemData.itemData.displayName;
-
+        
             }
+            
         }
-
+        
         //Destroy all created UIItem and then clear the list.
         public void ClearAllItemUIs()
         {
