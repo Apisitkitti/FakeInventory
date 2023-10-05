@@ -21,21 +21,18 @@ namespace Rov.InventorySystem
             {
                 if(ItemData.type == targetType)
                 {
-                  int number = 0;
                   foreach(var IconData in itemIconlist)
                   {
                     if(ItemData.displayName == IconData.displayName)
                     {
                       ItemData.icon = IconData.icon;
                     }
-                    number++;
                   }
                   resultlist.Add(ItemData); 
                 }
                 
             }
               return resultlist.ToArray();  
-           
         }
         
     }
